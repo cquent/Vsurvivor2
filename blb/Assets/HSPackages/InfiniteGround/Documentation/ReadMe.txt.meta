@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80e076c6f2a5d7f4e97fef5bcc4c40cc
+timeCreated: 1461449745
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 61349
+  packageName: 2D Infinite Ground
+  packageVersion: 1.2
+  assetPath: Assets/HSPackages/InfiniteGround/Documentation/ReadMe.txt
+  uploadId: 137175
