@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float maxHP = 10f;
+    public float baseHP = 10f;     // base value
+    public float maxHP;
     private float currentHP;
     public float xpReward = 10f;
 
-    void Awake()
+    public void Initialize(float healthMultiplier)
     {
+        maxHP = baseHP * healthMultiplier;
         currentHP = maxHP;
     }
 
@@ -26,10 +28,10 @@ public class EnemyHealth : MonoBehaviour
         PlayerXP playerXP = FindFirstObjectByType<PlayerXP>();
         if (playerXP != null)
         {
-            // XP peut être proportionnelle au HP max de l’ennemi si tu veux
-            float reward = maxHP / 20 * xpReward; // ou reward = maxHP * someFactor
+            float reward = maxHP / 20f * xpReward;
             playerXP.GainXP(reward);
         }
+
         Destroy(gameObject);
     }
 }

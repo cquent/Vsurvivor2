@@ -38,11 +38,11 @@ public class Zone : MonoBehaviour
     {
         switch (level)
         {
-            case 1: damage = 10f; radius = 4f; attackRate = 0.5f; break;
-            case 2: damage = 15f; radius = 6f; attackRate = 0.45f; break;
-            case 3: damage = 20f; radius = 8f; attackRate = 0.4f; break;
-            case 4: damage = 22f; radius = 9f; attackRate = 0.35f; break;
-            case 5: damage = 25f; radius = 10f; attackRate = 0.3f; break;
+            case 1: damage = 5f; radius = 4f; attackRate = 0.5f; break;
+            case 2: damage = 5f; radius = 6f; attackRate = 0.45f; break;
+            case 3: damage = 5f; radius = 8f; attackRate = 0.4f; break;
+            case 4: damage = 5f; radius = 9f; attackRate = 0.35f; break;
+            case 5: damage = 5f; radius = 10f; attackRate = 0.3f; break;
         }
 
         transform.localScale = Vector3.one * radius * 2f;

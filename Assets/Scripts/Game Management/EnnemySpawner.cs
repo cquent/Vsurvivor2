@@ -8,7 +8,7 @@ public class EnnemySpawner : MonoBehaviour
     public float spawnInterval = 1.5f;
     public float spawnOffset = 2f; // distance hors caméra
     public Camera mainCamera;
-
+    public float EnemyHealthMultiplier = 1f;
     private int level;
 
     private GameObject enemyChosen;
@@ -25,22 +25,30 @@ public class EnnemySpawner : MonoBehaviour
     {
         Vector3 spawnPos = GetSpawnPositionOutsideCamera();
         level = player.GetComponent<PlayerXP>().level;
-        if (level >= 20)
+        if (level >= 25)
+        {
+            spawnInterval = 0.5f;
+            EnemyHealthMultiplier = 4f;
+        }
+        else if (level >= 20)
         {
             spawnInterval = 0.75f;
+            EnemyHealthMultiplier = 3f;
         }
         else if (level >= 15)
         {
             spawnInterval = 0.1f;
+            EnemyHealthMultiplier = 2.5f;
         }
         else if (level >= 10)
         {
             spawnInterval = 0.15f;
+            EnemyHealthMultiplier = 2f;
         }
         else if (level >= 5)
         {
             spawnInterval = 0.2f;
-
+            EnemyHealthMultiplier = 1.5f;
         }
         else
         {
@@ -66,7 +74,14 @@ public class EnnemySpawner : MonoBehaviour
             enemyChosen = enemyPrefab[1];
         }
 
-        Instantiate(enemyChosen, spawnPos, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyChosen, spawnPos, Quaternion.identity);
+
+        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.Initialize(EnemyHealthMultiplier);
+        }
+
     }
 
     Vector3 GetSpawnPositionOutsideCamera()

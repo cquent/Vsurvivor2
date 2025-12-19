@@ -949,12 +949,12 @@ MonoBehaviour:
   Gun: {fileID: 7512823853570364584, guid: f2e1427d95e5fb446bf365401e36b551, type: 3}
   LazerSpawner: {fileID: 3721214755778407478, guid: 812b0b5fec944324a9b264e415bc28d3, type: 3}
   ZoneSpawner: {fileID: 3407182461029304039, guid: e6ae0ed7d7d7421489c640f4dca77b17, type: 3}
-  SwordLevel: 1
-  BoomerangLevel: 1
-  BombSpawnerLevel: 1
-  GunLevel: 5
-  LazerSpawnerLevel: 1
-  ZoneSpawnerLevel: 1
+  SwordLevel: 0
+  BoomerangLevel: 0
+  BombSpawnerLevel: 0
+  GunLevel: 0
+  LazerSpawnerLevel: 0
+  ZoneSpawnerLevel: 5
 --- !u!50 &1031911847
 Rigidbody2D:
   serializedVersion: 5
@@ -1082,6 +1082,7 @@ MonoBehaviour:
   spawnInterval: 0.1
   spawnOffset: 2
   mainCamera: {fileID: 519420031}
+  EnemyHealthMultiplier: 1
 --- !u!4 &1322965092
 Transform:
   m_ObjectHideFlags: 0
