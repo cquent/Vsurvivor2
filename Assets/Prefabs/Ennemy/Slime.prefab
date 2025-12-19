@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -6480819366837445303}
   - component: {fileID: -6801934479220436697}
   - component: {fileID: 4100786629538270705}
+  - component: {fileID: 4843259030364513965}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Ennemy
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1463230777
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
@@ -144,3 +145,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnnemyCollisions
   minDistance: 1.5
+--- !u!114 &4843259030364513965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559480838935247442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c77d7469704bc64cb852f2261c13440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  maxHP: 40

@@ -7,7 +7,7 @@ public class Bomb : MonoBehaviour
     public float speed = 5f;
     public float maxDistance = 3f;
     public float damage = 20f;
-    public float explosionRadius = 1.5f;
+    public float explosionRadius = 5f;
 
     public GameObject explosionPrefab; // Assign a centered explosion prefab
 
@@ -26,11 +26,11 @@ public class Bomb : MonoBehaviour
     {
         switch (level)
         {
-            case 1: damage = 20f; explosionRadius = 15f; break;
-            case 2: damage = 30f; explosionRadius = 17f; break;
-            case 3: damage = 45f; explosionRadius = 20f; break;
-            case 4: damage = 60f; explosionRadius = 25f; break;
-            case 5: damage = 80f; explosionRadius = 30f; break;
+            case 1: damage = 20f; explosionRadius = 1.5f; break;
+            case 2: damage = 30f; explosionRadius = 1.7f; break;
+            case 3: damage = 45f; explosionRadius = 2f; break;
+            case 4: damage = 60f; explosionRadius = 2.5f; break;
+            case 5: damage = 80f; explosionRadius = 3f; break;
         }
     }
 
@@ -63,22 +63,21 @@ public class Bomb : MonoBehaviour
         {
             GameObject exp = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-            // Scale relative to prefab's original size
-            float baseSize = 1f; // set this to the original sprite size if needed
-            float scaleFactor = explosionRadius / baseSize;
-            exp.transform.localScale = Vector3.one * scaleFactor;
+            // Multiplie l'échelle originale du prefab par explosionRadius
+            exp.transform.localScale = exp.transform.localScale * explosionRadius;
 
-            Destroy(exp, 0.5f); // destroy visual after 0.5s
+            Destroy(exp, 0.5f); // détruit l’effet visuel après 0.5s
         }
 
         // Damage enemies in radius
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-        foreach (var hit in hits)
+        EnemyHealth[] enemies = GameObject.FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+        foreach (var enemy in enemies)
         {
-            if (hit.CompareTag("Enemy"))
+            float dist = Vector2.Distance(transform.position, enemy.transform.position);
+            if (dist <= explosionRadius)
             {
-                Debug.Log($"Bomb hit {hit.name} for {damage} damage");
-                // hit.GetComponent<Enemy>()?.TakeDamage(damage);
+                enemy.TakeDamage(damage);
+
             }
         }
     }

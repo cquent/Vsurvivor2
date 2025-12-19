@@ -29,7 +29,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -16.08974, y: -50, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -802400517
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1483665779731714255, guid: 666321ec00631304fa75ce330d2cbac0, type: 3}
@@ -105,9 +105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bomb
   level: 0
-  speed: 5
-  maxDistance: 3
-  damage: 20
+  speed: 10
+  maxDistance: 5
+  damage: 30
   explosionRadius: 1.5
   explosionPrefab: {fileID: 6898273636345477811, guid: 25957aeefec65e94bba1042795b26450, type: 3}
   direction: {x: 0, y: 0}

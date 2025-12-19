@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3832528746839938092}
   - component: {fileID: 8540305878096897421}
   - component: {fileID: 4336711832949149110}
+  - component: {fileID: 6255651128532210145}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Weapon
@@ -78,19 +79,19 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1034761815
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 83fec11a4e5aed541b9b6552c73083e3, type: 2}
+  m_Sprite: {fileID: -2510476293373519475, guid: 091cc6d13d4b87940bbe4822abcddf5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2.6875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!114 &4336711832949149110
 MonoBehaviour:
@@ -112,3 +113,25 @@ MonoBehaviour:
   verticalOffset: 0.2
   player: {fileID: 0}
   sprite: {fileID: 0}
+--- !u!95 &6255651128532210145
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388484136427925193}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 095badbd9b7ab2d4dba79c82c3a99210, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

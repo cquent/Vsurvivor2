@@ -7,6 +7,7 @@ public class Lazer : MonoBehaviour
     public float speed = 75f; // fast projectile
     public float length = 5f; // visual length
     public float duration = 0.5f; // max lifetime
+    public float hitRadius = 1.5f; // rayon pour toucher les ennemis
 
     private Vector2 direction;
     private PlayerMovements player;
@@ -46,20 +47,23 @@ public class Lazer : MonoBehaviour
     {
         elapsed += Time.deltaTime;
 
-        // Move forward like a bullet
+
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
+
+        EnemyHealth[] enemies = GameObject.FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+        foreach (var enemy in enemies)
+        {
+            float dist = Vector2.Distance(transform.position, enemy.transform.position);
+            if (dist <= hitRadius)
+            {
+                enemy.TakeDamage(damage);
+                Debug.Log($"Lazer hit {enemy.name} for {damage} damage");
+            }
+        }
 
         if (elapsed >= duration)
             Destroy(gameObject);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            Debug.Log($"Lazer hit {other.name} for {damage} damage");
-            // other.GetComponent<Enemy>()?.TakeDamage(damage);
-            Destroy(gameObject); // optional: destroy on hit
-        }
-    }
+  
 }

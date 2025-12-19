@@ -4,7 +4,7 @@ using System.Collections;
 public class Gun : MonoBehaviour
 {
     public int level;
-    public float distance = 1.5f;       // distance from player
+    public float distance = 1.5f;       
     public GameObject bulletPrefab;
 
     public PlayerMovements player;
@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
     private float bulletSpeed;
     private float bulletDamage;
     private float bulletDistance;
+    private int bulletsPerShot;          
 
     private Coroutine shootRoutine;
 
@@ -36,16 +37,17 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        // Make the gun follow the player's last input direction
         Vector2 dir = SnapDirection(player.lastMoveDir);
         Vector2 pos = dir * distance;
-
         transform.localPosition = pos;
 
-        // Rotate gun to face movement direction (gun sprite faces right by default)
         if (dir != Vector2.zero)
         {
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+            if (player.transform.localScale.x < 0)
+                angle += 180f;
+
             transform.localRotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
@@ -54,11 +56,11 @@ public class Gun : MonoBehaviour
     {
         switch (level)
         {
-            case 1: bulletDamage = 10; bulletSpeed = 10; bulletDistance = 50; attackSpeed = 1f; break;
-            case 2: bulletDamage = 15; bulletSpeed = 12; bulletDistance = 60; attackSpeed = 2f; break;
-            case 3: bulletDamage = 20; bulletSpeed = 14; bulletDistance = 70; attackSpeed = 3f; break;
-            case 4: bulletDamage = 30; bulletSpeed = 16; bulletDistance = 80; attackSpeed = 4f; break;
-            case 5: bulletDamage = 50; bulletSpeed = 20; bulletDistance = 100; attackSpeed = 5f; break;
+            case 1: bulletDamage = 10; bulletSpeed = 10; bulletDistance = 50; attackSpeed = 1f; bulletsPerShot = 1; break;
+            case 2: bulletDamage = 15; bulletSpeed = 12; bulletDistance = 60; attackSpeed = 2f; bulletsPerShot = 3; break;
+            case 3: bulletDamage = 20; bulletSpeed = 14; bulletDistance = 70; attackSpeed = 3f; bulletsPerShot = 3; break;
+            case 4: bulletDamage = 30; bulletSpeed = 16; bulletDistance = 80; attackSpeed = 4f; bulletsPerShot = 5; break;
+            case 5: bulletDamage = 50; bulletSpeed = 20; bulletDistance = 100; attackSpeed = 5f; bulletsPerShot = 5; break;
         }
     }
 
@@ -76,17 +78,34 @@ public class Gun : MonoBehaviour
         Vector2 dir = SnapDirection(player.lastMoveDir);
         if (dir == Vector2.zero) dir = Vector2.down;
 
-        GameObject bullet = Instantiate(
-            bulletPrefab,
-            transform.position + (Vector3)(dir * 0.5f), // spawn slightly ahead of gun
-            Quaternion.identity
-        );
+        float[] angles;
 
-        // Rotate bullet to face direction (bullet sprite faces up by default)
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f; // offset because bullet faces up
-        bullet.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        if (bulletsPerShot == 1)
+            angles = new float[] { 0f };
+        else if (bulletsPerShot == 3)
+            angles = new float[] { -15f, 0f, 15f };
+        else // bulletsPerShot == 5
+            angles = new float[] { -30f, -15f, 0f, 15f, 30f };
+        // On a maintenant la balle centrale toujours incluse
 
-        bullet.GetComponent<Bullet>().Initialize(dir, bulletDamage, bulletSpeed, bulletDistance);
+        foreach (float a in angles)
+        {
+            Vector2 shotDir = RotateVector(dir, a);
+
+            GameObject bullet = Instantiate(
+                bulletPrefab,
+                transform.position + (Vector3)(shotDir * 0.5f),
+                Quaternion.identity
+            );
+
+            float angle = Mathf.Atan2(shotDir.y, shotDir.x) * Mathf.Rad2Deg - 90f;
+
+            if (player.transform.localScale.x < 0)
+                angle += 180f;
+
+            bullet.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            bullet.GetComponent<Bullet>().Initialize(shotDir, bulletDamage, bulletSpeed, bulletDistance);
+        }
     }
 
     Vector2 SnapDirection(Vector2 dir)
@@ -99,5 +118,13 @@ public class Gun : MonoBehaviour
         float rad = Mathf.Deg2Rad * angle;
 
         return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
+    }
+
+    Vector2 RotateVector(Vector2 v, float degrees)
+    {
+        float rad = degrees * Mathf.Deg2Rad;
+        float cos = Mathf.Cos(rad);
+        float sin = Mathf.Sin(rad);
+        return new Vector2(v.x * cos - v.y * sin, v.x * sin + v.y * cos).normalized;
     }
 }

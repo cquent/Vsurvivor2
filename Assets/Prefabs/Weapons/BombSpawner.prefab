@@ -47,4 +47,4 @@ MonoBehaviour:
   level: 0
   bombPrefab: {fileID: 8692839981813827869, guid: d2ad3096c08fa424b8b184df08ac05a4, type: 3}
   player: {fileID: 0}
-  distance: 1.5
+  distance: 5

@@ -29,7 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.76117, y: -1.22235, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -802400517
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: f478eaaeec67b324abfcb43ecf15f8b2, type: 3}
@@ -106,5 +106,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   level: 0
   distance: 1.5
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 558948876170357000, guid: 5cb5531a20c323c48a526dcf2314eb26, type: 3}
   player: {fileID: 0}

@@ -34,10 +34,16 @@ public class LazerSpawner : MonoBehaviour
         Vector2 dir = SnapDirection(player.lastMoveDir);
         transform.localPosition = dir * distance;
 
-        // Optional rotation of spawner itself
+        // Rotate spawner itself (sprite faces right by default)
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        // Compensate if player is flipped left
+        if (player.transform.localScale.x < 0)
+            angle += 180f;
+
         transform.localEulerAngles = new Vector3(0, 0, angle);
     }
+
 
     void UpdateStats()
     {

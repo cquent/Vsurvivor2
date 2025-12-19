@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000005736ad3d39213757
+  m_ApplyToSortingLayers: 000000005736ad3d39213757fb562cd0ef7d2539
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -477,7 +477,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1034761815
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 605253563, guid: d72c2c24f8790254ea01da3be234727b, type: 3}
@@ -544,7 +544,7 @@ MonoBehaviour:
   BombSpawnerLevel: 0
   GunLevel: 0
   LazerSpawnerLevel: 0
-  ZoneSpawnerLevel: 0
+  ZoneSpawnerLevel: 1
 --- !u!1 &1322965090
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,8 +574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ca13fdaeab82b4d9f02fd9a8cc6983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnnemySpawner
-  enemyPrefab: {fileID: 3000478691470947500, guid: 21596ddeeb8d57044b80595ad838e881, type: 3}
-  spawnInterval: 2
+  enemyPrefab: {fileID: 3559480838935247442, guid: 87d8fb8d476fade47ab42fa36c2a0749, type: 3}
+  spawnInterval: 3
   spawnOffset: 2
   mainCamera: {fileID: 519420031}
 --- !u!4 &1322965092
@@ -642,7 +642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414146, guid: 88ae0ab984026a942b403f4ad37c2d69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 414146, guid: 88ae0ab984026a942b403f4ad37c2d69, type: 3}
       propertyPath: m_LocalRotation.w

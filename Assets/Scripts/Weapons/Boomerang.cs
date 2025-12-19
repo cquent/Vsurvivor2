@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Boomerang : MonoBehaviour
 {
@@ -9,10 +10,14 @@ public class Boomerang : MonoBehaviour
     public float maxDistance = 3f;
     public float damage = 10f;
     public float spinSpeed = 360f; // degrees per second
+    public float hitRadius = 0.3f;
 
     public PlayerMovements player;
     public Vector2 startDir;
     public Vector2 startPos;
+
+
+    private HashSet<EnemyHealth> hitEnemies = new HashSet<EnemyHealth>();
 
     void Awake()
     {
@@ -76,6 +81,9 @@ public class Boomerang : MonoBehaviour
         {
             transform.position += (Vector3)(startDir * speed * Time.deltaTime);
             transform.Rotate(Vector3.forward, spinSpeed * Time.deltaTime); // spin
+
+            DamageEnemies();
+
             yield return null;
         }
 
@@ -85,15 +93,37 @@ public class Boomerang : MonoBehaviour
             Vector2 returnDir = ((Vector2)player.transform.position - (Vector2)transform.position).normalized;
             transform.position += (Vector3)(returnDir * speed * Time.deltaTime);
             transform.Rotate(Vector3.forward, spinSpeed * Time.deltaTime); // spin
+
+            DamageEnemies(); 
+
             yield return null;
         }
 
         // Reset for next throw
+        hitEnemies.Clear(); 
         startPos = player.transform.position;
         startDir = SnapDirection(player.lastMoveDir);
         transform.position = startPos;
 
         StartCoroutine(Throw());
+    }
+
+    void DamageEnemies()
+    {
+        EnemyHealth[] enemies = GameObject.FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+
+        foreach (var enemy in enemies)
+        {
+            if (hitEnemies.Contains(enemy))
+                continue;
+
+            float dist = Vector2.Distance(transform.position, enemy.transform.position);
+            if (dist <= hitRadius)
+            {
+                enemy.TakeDamage(damage);
+                hitEnemies.Add(enemy); // pour ne pas toucher plusieurs fois en un frame
+            }
+        }
     }
 
     Vector2 SnapDirection(Vector2 dir)

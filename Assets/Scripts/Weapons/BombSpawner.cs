@@ -7,7 +7,7 @@ public class BombSpawner : MonoBehaviour
     public GameObject bombPrefab;
     public PlayerMovements player;
 
-    public float distance = 1.5f; // spawn offset in front of player
+    public float distance = 3f; // spawn offset in front of player
     private float cooldown;
 
     void Awake()
@@ -32,11 +32,11 @@ public class BombSpawner : MonoBehaviour
     {
         switch (level)
         {
-            case 1: cooldown = 5f; break;
-            case 2: cooldown = 4.5f; break;
-            case 3: cooldown = 4f; break;
-            case 4: cooldown = 3.5f; break;
-            case 5: cooldown = 3f; break;
+            case 1: cooldown = 3f; break;
+            case 2: cooldown = 2.5f; break;
+            case 3: cooldown = 2f; break;
+            case 4: cooldown = 1.5f; break;
+            case 5: cooldown = 1f; break;
         }
     }
 
@@ -54,7 +54,7 @@ public class BombSpawner : MonoBehaviour
         Vector2 dir = SnapDirection(player.lastMoveDir);
 
         // Spawn bomb slightly in front of player
-        Vector2 spawnPos = (Vector2)player.transform.position + dir * distance;
+        Vector2 spawnPos = (Vector2)player.transform.position + dir;
         GameObject bomb = Instantiate(bombPrefab, spawnPos, Quaternion.identity);
 
         Bomb b = bomb.GetComponent<Bomb>();

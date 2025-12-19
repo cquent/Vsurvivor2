@@ -38,15 +38,14 @@ public class Zone : MonoBehaviour
     {
         switch (level)
         {
-            case 1: damage = 5f; radius = 6f; attackRate = 0.5f; break;
-            case 2: damage = 8f; radius = 10f; attackRate = 0.45f; break;
-            case 3: damage = 12f; radius = 15f; attackRate = 0.4f; break;
-            case 4: damage = 18f; radius = 20f; attackRate = 0.35f; break;
-            case 5: damage = 25f; radius = 25f; attackRate = 0.3f; break;
+            case 1: damage = 10f; radius = 4f; attackRate = 0.5f; break;
+            case 2: damage = 15f; radius = 6f; attackRate = 0.45f; break;
+            case 3: damage = 20f; radius = 8f; attackRate = 0.4f; break;
+            case 4: damage = 22f; radius = 9f; attackRate = 0.35f; break;
+            case 5: damage = 25f; radius = 10f; attackRate = 0.3f; break;
         }
 
         transform.localScale = Vector3.one * radius * 2f;
-
     }
 
     IEnumerator ZoneEffect()
@@ -55,16 +54,18 @@ public class Zone : MonoBehaviour
 
         while (elapsed < duration)
         {
+            // Keep zone centered on player
+            if (player != null)
+                transform.position = player.transform.position;
 
-
-            // Damage enemies in zone
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
-            foreach (var hit in hits)
+            // Damage enemies in zone using EnemyHealth components (no collider needed)
+            EnemyHealth[] enemies = GameObject.FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+            foreach (var enemy in enemies)
             {
-                if (hit.CompareTag("Enemy"))
+                float dist = Vector2.Distance(transform.position, enemy.transform.position);
+                if (dist <= radius)
                 {
-                    Debug.Log($"Zone hit {hit.name} for {damage} damage");
-                    // hit.GetComponent<Enemy>()?.TakeDamage(damage);
+                    enemy.TakeDamage(damage);
                 }
             }
 

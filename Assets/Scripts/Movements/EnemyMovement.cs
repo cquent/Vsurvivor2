@@ -39,8 +39,6 @@ public class EnemyMovement : MonoBehaviour
         pos.z = 0f;
         transform.position = pos;
 
-        Debug.Log(name + " pos: " + transform.position);
-
         // Flip sprite universel
         if (facingRightByDefault)
             spriteRenderer.flipX = toPlayer.x < 0; // inverse pour ceux qui regardent à droite par défaut

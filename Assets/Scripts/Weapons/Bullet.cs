@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed;
-    public float damage;
-    public float maxDistance;
+    public float speed = 10f;
+    public float damage = 10f;
+    public float maxDistance = 50f;
+    public float hitRadius = 1f; 
 
     public Vector2 direction;
-    public Vector2 startPos;
+    private Vector2 startPos;
 
-    // Called by Gun immediately after Instantiate
     public void Initialize(Vector2 dir, float dmg, float spd, float distance)
     {
         direction = dir.normalized;
@@ -21,18 +21,29 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
 
-        if (Vector2.Distance(startPos, transform.position) >= maxDistance)
-            Destroy(gameObject);
-    }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
+        if (Vector2.Distance(startPos, transform.position) >= maxDistance)
         {
-            Debug.Log($"Bullet hit {other.name} for {damage} damage");
             Destroy(gameObject);
+            return;
+        }
+
+
+        EnemyHealth[] enemies = GameObject.FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+        foreach (var enemy in enemies)
+        {
+            float dist = Vector2.Distance(transform.position, enemy.transform.position);
+            if (dist <= hitRadius)
+            {
+                enemy.TakeDamage(damage);
+                Destroy(gameObject);
+                return;
+            }
         }
     }
+
+
 }
