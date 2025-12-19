@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ca13fdaeab82b4d9f02fd9a8cc6983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnnemySpawner
-  enemyPrefab: {fileID: 3559480838935247442, guid: 87d8fb8d476fade47ab42fa36c2a0749, type: 3}
+  enemyPrefab: {fileID: 4170552159265027157, guid: 7809310f44d8b564387fa8bc1bea51a7, type: 3}
   spawnInterval: 3
   spawnOffset: 2
   mainCamera: {fileID: 519420031}
@@ -674,7 +674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11479670, guid: 88ae0ab984026a942b403f4ad37c2d69, type: 3}
       propertyPath: modifier
-      value: 0.1
+      value: 0.055
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
